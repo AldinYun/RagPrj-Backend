@@ -1,8 +1,10 @@
 import openai
+import google.generativeai as genai
 
 # OpenAI API 키 설정
 openai.api_key = ''
-
+# Gemini API 키 설정
+genai.configure(api_key='')
 
 def ask_openai_gpt(question):
     response = openai.ChatCompletion.create(
@@ -12,4 +14,9 @@ def ask_openai_gpt(question):
     return response.choices[0].message['content']
 
 
-#print(ask_openai_gpt('안녕하세요'))
+def ask_gemini(question):
+    model = genai.GenerativeModel('gemini-pro')
+    chat = model.start_chat(history=[]
+    )
+    response = chat.send_message(question)
+    return response.text
