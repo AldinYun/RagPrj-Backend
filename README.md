@@ -2,6 +2,11 @@
 
 이 프로젝트는 크롤링과 벡터 검색을 통한 RAG에 대한 고객 설명용 예제로 작성되었습니다.
 
+# 지원 모델
+- GPT3.5-turbo
+- Gemini
+현재 RAG 성능평가 결과 Gemini가 할루시네이션이 발생하지 않으며 GPT는 다수 발생..(prompt instruct fitting이 좀 더 필요해 보임...)
+
 ## 기본 동작
 
 사용자가 입력한 키워드를 기반으로 네이버 뉴스를 크롤링하여 가져오는 API인 `/getNewsList`가 있습니다. 이후 사용자의 다음 질의에는 가져온 뉴스 내용이 반영됩니다. 사용자는 `/ra` 또는 `/generate` 엔드포인트를 통해 텍스트를 생성할 수 있습니다.
@@ -62,5 +67,5 @@ http://127.0.0.1:8000/docs#
 /ra (type: POST, prompt: str)  
 프롬프트를 벡터 색인하여 가장 유사한 5개의 청크를 가져옵니다 (증강생성까지의 테스트 용도).  
 
-/generate(type: POST, prompt: str)  
+/generate(type: POST, prompt: str, modelNum: int)  
 RAG 설명용 예제로 증강 생성된 내용을 지식으로 첨부하여 GPT-3.5를 통해 generate까지 실시합니다 (구동을 위해서는 completion.py에 OpenAI에서 활용 가능한 key가 있어야 함).  
