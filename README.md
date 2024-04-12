@@ -53,6 +53,7 @@ CREATE TABLE index_detail (
 - uvicorn == 0.23.2
 - beautifulsoup4 == 4.12.2
 - openai == 0.28.1
+- genai == 2.1.0
 
 ### 로컬테스트
 uvicorn api:app --reload --host 0.0.0.0  
