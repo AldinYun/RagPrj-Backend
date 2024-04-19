@@ -16,7 +16,6 @@ def ask_openai_gpt(question):
 
 def ask_gemini(question):
     model = genai.GenerativeModel('gemini-pro')
-    chat = model.start_chat(history=[]
-    )
+    chat = model.start_chat(history=[])
     response = chat.send_message(question)
     return response.text
