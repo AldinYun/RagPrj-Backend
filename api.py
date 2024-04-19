@@ -25,6 +25,16 @@ async def rag(prompt: str):
 @app.post("/generate")
 async def generate(prompt: str):
     db_connector = dbConnect()
-    doc = db_connector.retrivalAugment(prompt)
-    prompt = 'Please create an answer for [question]. please answer with external knowledge. Please do not specify the source of the data in the answer. Please do not answer in short answer. \n [question]\n'+ prompt + '\n'+ doc
-    return {"response": completion.ask_openai_gpt(prompt)}
+    documents = db_connector.retrivalAugment(prompt)
+    prompt_for_gpt = (
+        "Please create an answer for [question]. please answer with external knowledge. "
+        "Please do not specify the source of the data in the answer. "
+        "Please do not answer in short answer. \n"
+        "[question]\n"
+        + prompt +
+        "\n" + documents
+    )
+    # Generate response using GPT-3
+    response = ask_openai_gpt(prompt_for_gpt)
+    
+    return {"response": response}
